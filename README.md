@@ -2,7 +2,7 @@
 
 Pync is a simple Python module written in C, for demonstrative purposes.
 
-## BUILD INTSRUCTIONS
+## BUILD INSTRUCTIONS
 
 Clone this reposintory:
 ```
@@ -15,6 +15,11 @@ Build the module using GNU Make:
    %  make b
    %  ls pync.so
    pync.so*
+```
+
+Edit `pync.py`:   (optional)
+```
+   % vi pync.py   # or any editor you prefer
 ```
 
 Run `pync.py`:
