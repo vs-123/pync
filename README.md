@@ -156,14 +156,14 @@ To make it simpler, let's substitute the variables:
 cc -o pync.so -shared -fPIC $(python3-config --includes) pync.c pync_module.c
 ```
 
-**[EXPLANATINO]**
-- Since we're making a library and not an executable we use `-shared` to tell the compiler that our "binary" is actuall going to be a shared object (which is also why we used `.so` extension in `-o pync.so`).
+**[EXPLANATION]**
+- Since we're making a library and not an executable, we use `-shared` to tell the compiler that our "binary" is actually going to be a shared object (which is also why we used `.so` extension in `-o pync.so`).
 
-- We want our library to work regardless of where the machine places it in memory. To deal with this, we use `-fPIC` to tell the compiler that this is Position Independent COde.
+- We want our library to work regardless of where the machine places it in memory. To deal with this, we use `-fPIC` to tell the compiler that this is Position Independent Code.
 
 - `$(python3-config --includes)` uses Python to get the header paths for `Python.h` and its siblings.
 
-- Later when you run `pync.py`, it picks up this `pync.so` shared object, looks for `PyInit_pync` and then loads it for use.
+- Later when you run `pync.py`, it picks this `pync.so` shared object up, looks for `PyInit_pync` and then loads it for use.
 
 ## LICENSE
 
