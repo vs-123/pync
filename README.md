@@ -4,7 +4,7 @@ Pync is a simple Python module written in C, for demonstrative purposes.
 
 ## BUILD INSTRUCTIONS
 
-Clone this reposintory:
+Clone this repository:
 ```
    %  git clone https://github.com/vs-123/pync
    %  cd pync/
@@ -143,6 +143,27 @@ PyMODINIT_FUNC PyInit_pync (void)
    return PyModule_Create (&pyncmod);
 }
 ```
+
+## COMPILATION DETAILS
+
+This is how we compile the module:   (snippet from `Makefile`)
+```Makefile
+$(CC) -o $(OUTPUT).so -shared -fPIC $(PY_INCLUDES) $(SOURCES)
+```
+
+To make it simpler, let's substitute the variables:
+```Makefile
+cc -o pync.so -shared -fPIC $(python3-config --includes) pync.c pync_module.c
+```
+
+**[EXPLANATINO]**
+- Since we're making a library and not an executable we use `-shared` to tell the compiler that our "binary" is actuall going to be a shared object (which is also why we used `.so` extension in `-o pync.so`).
+
+- We want our library to work regardless of where the machine places it in memory. To deal with this, we use `-fPIC` to tell the compiler that this is Position Independent COde.
+
+- `$(python3-config --includes)` uses Python to get the header paths for `Python.h` and its siblings.
+
+- Later when you run `pync.py`, it picks up this `pync.so` shared object, looks for `PyInit_pync` and then loads it for use.
 
 ## LICENSE
 
